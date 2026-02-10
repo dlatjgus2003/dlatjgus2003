@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Baritone. Dominic Lim</title>
+  <meta name="description" content="Baritone. Dominic Lim — artist portfolio"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/styles.css"/>
+  <link rel="icon" href="data:,">
+
+  <!-- Libre Bodoni Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body data-page="home">
+  <!-- =========================
+       HEADER
+  ========================== -->
+  <header>
+    <div class="container navbar">
+      <a class="brand" href="/">Baritone. Dominic Lim</a>
+
+      <nav class="navlinks" aria-label="Primary">
+        <a href="/bio/">BIO</a>
+        <a href="/repertoire/">REPERTOIRE</a>
+
+        <!-- PHOTO dropdown -->
+        <div class="dropdown">
+          <a class="dropdown-trigger" href="/photo/portrait/" aria-haspopup="true" aria-expanded="false">PHOTO</a>
+          <div class="dropdown-menu" role="menu" aria-label="Photo">
+            <a role="menuitem" href="/photo/portrait/">PORTRAIT</a>
+            <a role="menuitem" href="/photo/stage/">STAGE</a>
+          </div>
+        </div>
+
+        <a href="/video/">VIDEO</a>
+        <a href="/contact/">CONTACT</a>
+      </nav>
+
+      <button class="hamburger" type="button" data-hamburger>MENU</button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" data-drawer>
+    <div class="panel">
+      <a data-close-drawer href="/bio/">BIO</a>
+      <a data-close-drawer href="/repertoire/">REPERTOIRE</a>
+      <a data-close-drawer href="/photo/portrait/">PHOTO</a>
+      <a class="sub" data-close-drawer href="/photo/portrait/">PORTRAIT</a>
+      <a class="sub" data-close-drawer href="/photo/stage/">STAGE</a>
+      <a data-close-drawer href="/video/">VIDEO</a>
+      <a data-close-drawer href="/contact/">CONTACT</a>
+    </div>
+  </div>
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+  <main>
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="hero reveal" aria-label="Hero">
+        <img
+          src="/assets/images/img/main.jpg"
+          alt="Dominic Lim portrait"
+          loading="eager"
+          decoding="async"
+        />
+      </section>
+
+      <!-- VIDEO PREVIEW (2개) -->
+      <section class="reveal home-video">
+        <div class="home-video-head">
+          <h2 class="section-title" style="margin:0;">Video</h2>
+          <a class="home-video-more" href="/video/">View all video →</a>
+        </div>
+
+        <!-- ✅ site.js가 여기(#homeVideoPreview)에 비디오 2개를 주입 -->
+        <div class="home-video-grid" id="homeVideoPreview"></div>
+      </section>
+
+      <!-- UPCOMING & REPERTOIRE -->
+      <section class="reveal">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+          <h2 class="section-title" style="margin:0;">Upcoming &amp; Repertoire</h2>
+          <a href="/repertoire/" style="font-size:12px; letter-spacing:.14em; text-transform:uppercase;">
+            View all repertoire →
+          </a>
+        </div>
+
+        <div class="split" style="margin-top:12px;">
+          <!-- Upcoming -->
+          <div class="listblock" style="margin:0;">
+            <h3 style="margin:0 0 10px; font-size:16px; letter-spacing:.12em; text-transform:uppercase;">Upcoming</h3>
+            <ul class="bullets">
+              <li><strong>2026 March</strong> — L'elisir d'amore (Choir / Belcore cover)</li>
+              <li><strong>2026 May</strong> — La cambiale di matrimonio (Slook)</li>
+              <li><strong>2026 Dec</strong> — Coronation Mass by W. A. Mozart (Bass soloist)</li>
+            </ul>
+          </div>
+
+          <!-- Repertoire Preview -->
+          <div class="listblock" style="margin:0;">
+            <h3 style="margin:0 0 10px; font-size:16px; letter-spacing:.12em; text-transform:uppercase;">Repertoire preview</h3>
+            <ul class="bullets">
+              <li>W. A. Mozart — Don Giovanni (Leporello)</li>
+              <li>W. A. Mozart — Le nozze di Figaro (Figaro / Conte)</li>
+              <li>G. Donizetti — L'elisir d'amore (Belcore)</li>
+              <li>G. Puccini — Gianni Schicchi (Gianni Schicchi)</li>
+              <li>Oratorio &amp; Lied</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT PREVIEW -->
+      <section class="reveal">
+        <h2 class="section-title" style="margin:0 0 12px;">Contact</h2>
+
+        <div class="listblock" style="margin:0;">
+          <ul class="bullets">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:dlatjgus2003@naver.com">dlatjgus2003@naver.com</a>
+            </li>
+
+            <li>
+              <strong>Resume:</strong>
+              <a href="/assets/resume/Dominic_Lim_Resume.pdf" target="_blank" rel="noopener">
+                Download PDF
+              </a>
+            </li>
+
+            <li>
+              <strong>Instagram:</strong>
+              <a href="https://www.instagram.com/dominico_lim/" target="_blank" rel="noopener">
+                @dominico_lim
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Baritone. Dominic Lim
+    </div>
+  </footer>
+
+  <!-- =========================
+       SCRIPTS (순서 중요)
+       1) year
+       2) VIDEO_DB (홈 미리보기 연동용)
+       3) site.js (메뉴/라이트박스/홈 미리보기/리빌 등)
+  ========================== -->
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- ✅ 비디오 DB: video탭과 "연동"되는 핵심 -->
+  <script src="/assets/data/videos.js"></script>
+
+  <!-- ✅ 공용 스크립트 -->
+  <script src="/assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Video — Baritone. Dominic Lim</title>
+  <link rel="stylesheet" href="/assets/styles.css"/>
+  <link rel="icon" href="data:,">
+</head>
+
+<body data-page="video">
+  <!-- ✅ 네 사이트 공용 header 그대로 붙여 (이미 있는거 쓰면 됨) -->
+  <header>
+  <div class="container navbar">
+    <a class="brand" href="/">Baritone. Dominic Lim</a>
+    <nav class="navlinks" aria-label="Primary">
+  <a href="/bio/">BIO</a>
+  <a href="/repertoire/">REPERTOIRE</a>
+
+  <!-- PHOTO dropdown (fixed) -->
+  <div class="dropdown">
+    <a class="dropdown-trigger" href="/photo/portrait/" aria-haspopup="true" aria-expanded="false">PHOTO</a>
+    <div class="dropdown-menu" role="menu" aria-label="Photo">
+      <a role="menuitem" href="/photo/portrait/">PORTRAIT</a>
+      <a role="menuitem" href="/photo/stage/">STAGE</a>
+    </div>
+  </div>
+
+  <a href="/video/">VIDEO</a>
+  <a href="/contact/">CONTACT</a>
+  
+</nav>
+
+    <button class="hamburger" type="button" data-hamburger>MENU</button>
+  </div>
+</header>
+
+  <main>
+    <div class="container">
+      <h1 class="page-title">Video</h1>
+
+      <!-- Filters -->
+      <div class="vfilters" id="vFilters"></div>
+
+      <!-- Sections (grouped by label) -->
+      <div id="vSections"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Baritone. Dominic Lim</div>
+  </footer>
+
+  <!-- ✅ DATA: 유튜브 링크 붙여넣는 DB -->
+  <script src="/assets/data/videos.js"></script>
+
+  <script>
+    // footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // ------------------------------
+    // YouTube helpers (URL -> videoId)
+    // ------------------------------
+    function parseYouTubeId(input){
+      if(!input) return "";
+      const s = String(input).trim();
+
+      // if already looks like an ID (11 chars typical)
+      if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+
+      try{
+        const u = new URL(s);
+        // youtu.be/<id>
+        if(u.hostname.includes("youtu.be")){
+          return (u.pathname || "").replace("/", "").slice(0, 11);
+        }
+        // youtube.com/watch?v=<id>
+        const v = u.searchParams.get("v");
+        if(v) return v.slice(0, 11);
+
+        // youtube.com/embed/<id> or /shorts/<id>
+        const parts = (u.pathname || "").split("/").filter(Boolean);
+        const i = parts.findIndex(p => p === "embed" || p === "shorts");
+        if(i >= 0 && parts[i+1]) return parts[i+1].slice(0, 11);
+      }catch(e){
+        return "";
+      }
+      return "";
+    }
+
+    function ytThumbById(id, quality){
+      // quality: hqdefault | sddefault | mqdefault | default
+      const q = quality || "hqdefault";
+      return `https://i.ytimg.com/vi/${id}/${q}.jpg`;
+    }
+
+    function ytEmbedById(id){
+      return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+    }
+
+    // ------------------------------
+    // Normalize DB
+    // ------------------------------
+    function normalizeVideos(db){
+      const arr = Array.isArray(db) ? db : [];
+      return arr.map((x, idx) => {
+        const id = parseYouTubeId(x.youtube || x.videoId || "");
+        return {
+          id,
+          youtube: x.youtube || (id ? `https://www.youtube.com/watch?v=${id}` : ""),
+          title: (x.title || "").trim() || `Video ${idx+1}`,
+          label: (x.label || "Video").trim(),
+          featured: !!x.featured
+        };
+      }).filter(v => v.id); // remove invalid
+    }
+
+    // ------------------------------
+    // Group by label (section blocks)
+    // ------------------------------
+    function groupByLabel(videos){
+      const map = new Map();
+      videos.forEach(v => {
+        const key = v.label || "Video";
+        if(!map.has(key)) map.set(key, []);
+        map.get(key).push(v);
+      });
+      return Array.from(map.entries()).map(([label, list]) => ({ label, list }));
+    }
+
+    // ------------------------------
+    // Render
+    // ------------------------------
+    const VIDEOS = normalizeVideos(window.VIDEO_DB);
+
+    // filters = all labels + All
+    const labels = Array.from(new Set(VIDEOS.map(v => v.label)));
+    const filters = ["All", ...labels];
+
+    const $filters = document.getElementById("vFilters");
+    const $sections = document.getElementById("vSections");
+
+    let activeFilter = "All";
+
+    function makeFilterButton(text){
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "vfilterbtn" + (text === activeFilter ? " active" : "");
+      b.textContent = text;
+      b.addEventListener("click", () => {
+        activeFilter = text;
+        renderAll();
+      });
+      return b;
+    }
+
+    function makeCard(v){
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vcard";
+      btn.setAttribute("aria-label", `Play ${v.title}`);
+
+      const thumb = document.createElement("div");
+      thumb.className = "vthumb";
+
+      const img = document.createElement("img");
+      img.alt = `Dominic Lim - ${v.title}`;
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.referrerPolicy = "no-referrer";
+      img.src = ytThumbById(v.id, "hqdefault");
+
+      // ✅ thumbnail fallback chain (hq -> sd -> mq -> default)
+      img.onerror = () => {
+        const step = img.dataset.fallback || "0";
+        if(step === "0"){
+          img.dataset.fallback = "1";
+          img.src = ytThumbById(v.id, "sddefault");
+          return;
+        }
+        if(step === "1"){
+          img.dataset.fallback = "2";
+          img.src = ytThumbById(v.id, "mqdefault");
+          return;
+        }
+        img.src = ytThumbById(v.id, "default");
+      };
+
+      const play = document.createElement("div");
+      play.className = "vplay";
+      play.setAttribute("aria-hidden", "true");
+
+      thumb.appendChild(img);
+      thumb.appendChild(play);
+
+      const meta = document.createElement("div");
+      meta.className = "vmeta";
+
+      const lab = document.createElement("div");
+      lab.className = "vlabel";
+      lab.textContent = v.label;
+
+      const title = document.createElement("div");
+      title.className = "vtitle";
+      title.textContent = v.title;
+
+      meta.appendChild(lab);
+      meta.appendChild(title);
+
+      btn.appendChild(thumb);
+      btn.appendChild(meta);
+
+      btn.addEventListener("click", () => openLightbox(v));
+
+      return btn;
+    }
+
+    function renderAll(){
+      // filters rerender
+      $filters.innerHTML = "";
+      filters.forEach(f => $filters.appendChild(makeFilterButton(f)));
+
+      // sections rerender
+      $sections.innerHTML = "";
+
+      const visible = (activeFilter === "All")
+        ? VIDEOS
+        : VIDEOS.filter(v => v.label === activeFilter);
+
+      const groups = groupByLabel(visible);
+
+      groups.forEach(g => {
+        const sec = document.createElement("section");
+        sec.className = "vsec reveal"; // ✅ reveal: fade-in 적용
+
+        const head = document.createElement("div");
+        head.className = "vsec-head";
+
+        const h = document.createElement("h2");
+        h.className = "vsec-title";
+        h.textContent = g.label;
+
+        const c = document.createElement("div");
+        c.className = "vsec-count";
+        c.textContent = `${g.list.length} videos`;
+
+        head.appendChild(h);
+        head.appendChild(c);
+
+        const grid = document.createElement("div");
+        grid.className = "vgrid";
+
+        g.list.forEach(v => grid.appendChild(makeCard(v)));
+
+        sec.appendChild(head);
+        sec.appendChild(grid);
+
+        $sections.appendChild(sec);
+      });
+
+      // re-bind reveal observer (needs repeatable)
+      refreshReveal();
+    }
+
+    // ------------------------------
+    // Lightbox (modal player) using your CSS class .vlb
+    // ------------------------------
+    function ensureLightbox(){
+      let lb = document.querySelector(".vlb");
+      if(lb) return lb;
+
+      lb = document.createElement("div");
+      lb.className = "vlb";
+      lb.setAttribute("role", "dialog");
+      lb.setAttribute("aria-modal", "true");
+
+      lb.innerHTML = `
+        <button class="vlb-close" type="button">Close</button>
+        <button class="vlb-nav prev" type="button" aria-label="Previous">‹</button>
+        <button class="vlb-nav next" type="button" aria-label="Next">›</button>
+
+        <div class="vlb-stage">
+          <div class="vlb-frame">
+            <iframe title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="vlb-meta">
+            <div class="vlb-label"></div>
+            <div class="vlb-title"></div>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(lb);
+
+      lb.querySelector(".vlb-close").addEventListener("click", closeLightbox);
+      lb.addEventListener("click", (e) => {
+        if(e.target === lb) closeLightbox();
+      });
+      window.addEventListener("keydown", (e) => {
+        if(!lb.classList.contains("open")) return;
+        if(e.key === "Escape") closeLightbox();
+        if(e.key === "ArrowLeft") navLightbox(-1);
+        if(e.key === "ArrowRight") navLightbox(1);
+      });
+
+      lb.querySelector(".vlb-nav.prev").addEventListener("click", () => navLightbox(-1));
+      lb.querySelector(".vlb-nav.next").addEventListener("click", () => navLightbox(1));
+
+      return lb;
+    }
+
+    let lbIndex = -1;
+    let lbList = []; // current visible list in the modal nav
+
+    function openLightbox(video){
+      const lb = ensureLightbox();
+
+      // build nav list based on current filter
+      lbList = (activeFilter === "All") ? VIDEOS : VIDEOS.filter(v => v.label === activeFilter);
+      lbIndex = lbList.findIndex(v => v.id === video.id);
+      if(lbIndex < 0) lbIndex = 0;
+
+      const frame = lb.querySelector("iframe");
+      const lab = lb.querySelector(".vlb-label");
+      const title = lb.querySelector(".vlb-title");
+
+      frame.src = ytEmbedById(video.id);
+      lab.textContent = video.label || "Video";
+      title.textContent = video.title || "—";
+
+      lb.classList.add("open");
+      document.documentElement.style.overflow = "hidden";
+    }
+
+    function closeLightbox(){
+      const lb = document.querySelector(".vlb");
+      if(!lb) return;
+      const frame = lb.querySelector("iframe");
+      frame.src = "";
+      lb.classList.remove("open");
+      document.documentElement.style.overflow = "";
+    }
+
+    function navLightbox(dir){
+      if(!lbList.length) return;
+      lbIndex = (lbIndex + dir + lbList.length) % lbList.length;
+      const v = lbList[lbIndex];
+
+      const lb = document.querySelector(".vlb");
+      if(!lb) return;
+
+      lb.querySelector("iframe").src = ytEmbedById(v.id);
+      lb.querySelector(".vlb-label").textContent = v.label || "Video";
+      lb.querySelector(".vlb-title").textContent = v.title || "—";
+    }
+
+    // ------------------------------
+    // Reveal (repeatable version)
+    // - 스크롤 내려도/올려도 계속 페이드인/아웃 동작
+    // ------------------------------
+    function refreshReveal(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window) || els.length === 0) {
+        els.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+
+      // re-create observer each render (simple & safe)
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('is-visible');
+          else e.target.classList.remove('is-visible'); // ✅ 반복 동작
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+      els.forEach(el => io.observe(el));
+    }
+
+    renderAll();
+  </script>
+
+  <!-- ✅ 네 사이트 공용 site.js가 필요하면 유지 -->
+  <script src="/assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>STAGE — Baritone. Dominic Lim</title>
+  <link rel="stylesheet" href="/assets/styles.css"/>
+  <link rel="icon" href="data:,">
+  <meta name="description" content="Baritone. Dominic Lim — artist portfolio"/>
+
+  <!-- Libre Bodoni Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- Lightbox (only this page) --- */
+    .plb{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.86);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 24px;
+    }
+    .plb.open{ display:flex; }
+
+    .plb-stage{
+      margin: 0;
+      width: min(92vw, 1100px);
+      height: min(84vh, 760px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .plb-img{
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 20px 80px rgba(0,0,0,.55);
+      border-radius: 10px;
+    }
+
+    .plb-close{
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 2;
+      border: 0;
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: .08em;
+    }
+    .plb-close:hover{ background: rgba(255,255,255,.16); }
+
+    .plb-nav{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      border: 0;
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 44px;
+      text-align: center;
+    }
+    .plb-nav:hover{ background: rgba(255,255,255,.16); }
+    .plb-nav.prev{ left: 18px; }
+    .plb-nav.next{ right: 18px; }
+
+    @media (max-width: 640px){
+      .plb{ padding: 14px; }
+      .plb-stage{
+        width: 96vw;
+        height: 82vh;
+      }
+      .plb-nav{ width: 40px; height: 40px; line-height: 40px; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container navbar">
+    <a class="brand" href="/">Baritone. Dominic Lim</a>
+
+    <nav class="navlinks" aria-label="Primary">
+      <a href="/bio/">BIO</a>
+      <a href="/repertoire/">REPERTOIRE</a>
+
+      <div class="dropdown">
+        <a class="dropdown-trigger" href="/photo/portrait/" aria-haspopup="true" aria-expanded="false">PHOTO</a>
+        <div class="dropdown-menu" role="menu" aria-label="Photo">
+          <a role="menuitem" href="/photo/portrait/">PORTRAIT</a>
+          <a role="menuitem" href="/photo/stage/">STAGE</a>
+        </div>
+      </div>
+
+      <a href="/video/">VIDEO</a>
+      <a href="/contact/">CONTACT</a>
+      
+    </nav>
+
+    <button class="hamburger" type="button" data-hamburger>MENU</button>
+  </div>
+</header>
+
+<div class="mobile-drawer" data-drawer>
+  <div class="panel">
+    <a data-close-drawer href="/bio/">BIO</a>
+    <a data-close-drawer href="/repertoire/">REPERTOIRE</a>
+    <a data-close-drawer href="/photo/portrait/">PHOTO</a>
+    <a class="sub" data-close-drawer href="/photo/portrait/">PORTRAIT</a>
+    <a class="sub" data-close-drawer href="/photo/stage/">STAGE</a>
+    <a data-close-drawer href="/video/">VIDEO</a>
+    <a data-close-drawer href="/contact/">CONTACT</a>
+    
+  </div>
+</div>
+
+<main>
+  <div class="container">
+    <h1 class="page-title">Stage</h1>
+
+    <!-- Same grid class as Portrait: .pg + .ptile -->
+    <section class="pg" aria-label="Stage grid">
+
+      <!-- ✅ IMPORTANT: Update counts/filenames to match your /assets/images/photo/stage/ folder -->
+      <!-- If your files are 1.jpg, 2.jpg, 3.jpg... keep as-is. If not, rename them or edit srcs below. -->
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/1.jpg" aria-label="Open stage 1">
+        <img src="/assets/images/photo/stage/1.jpg" alt="Stage 1" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/2.jpg" aria-label="Open stage 2">
+        <img src="/assets/images/photo/stage/2.jpg" alt="Stage 2" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/3.jpg" aria-label="Open stage 3">
+        <img src="/assets/images/photo/stage/3.jpg" alt="Stage 3" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/4.jpg" aria-label="Open stage 4">
+        <img src="/assets/images/photo/stage/4.jpg" alt="Stage 4" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/5.jpg" aria-label="Open stage 5">
+        <img src="/assets/images/photo/stage/5.jpg" alt="Stage 5" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/6.jpg" aria-label="Open stage 6">
+        <img src="/assets/images/photo/stage/6.jpg" alt="Stage 6" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/7.jpg" aria-label="Open stage 7">
+        <img src="/assets/images/photo/stage/7.jpg" alt="Stage 7" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/8.jpg" aria-label="Open stage 8">
+        <img src="/assets/images/photo/stage/8.jpg" alt="Stage 8" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/9.jpg" aria-label="Open stage 9">
+        <img src="/assets/images/photo/stage/9.jpg" alt="Stage 9" loading="lazy">
+      </button>
+
+      <button class="ptile" type="button" data-src="/assets/images/photo/stage/10.jpg" aria-label="Open stage 10">
+        <img src="/assets/images/photo/stage/10.jpg" alt="Stage 10" loading="lazy">
+      </button>
+
+<button class="ptile" type="button" data-src="/assets/images/photo/stage/11.jpg" aria-label="Open stage 11">
+        <img src="/assets/images/photo/stage/11.jpg" alt="Stage 11" loading="lazy">
+      </button>
+
+<button class="ptile" type="button" data-src="/assets/images/photo/stage/12.jpg" aria-label="Open stage 12">
+        <img src="/assets/images/photo/stage/12.jpg" alt="Stage 12" loading="lazy">
+      </button>
+
+<button class="ptile" type="button" data-src="/assets/images/photo/stage/13.jpg" aria-label="Open stage 13">
+        <img src="/assets/images/photo/stage/13.jpg" alt="Stage 13" loading="lazy">
+      </button>
+
+<button class="ptile" type="button" data-src="/assets/images/photo/stage/14.jpg" aria-label="Open stage 14">
+        <img src="/assets/images/photo/stage/14.jpg" alt="Stage 14" loading="lazy">
+      </button>
+
+<button class="ptile" type="button" data-src="/assets/images/photo/stage/15.jpg" aria-label="Open stage 15">
+        <img src="/assets/images/photo/stage/15.jpg" alt="Stage 15" loading="lazy">
+      </button>
+
+<button class="ptile" type="button" data-src="/assets/images/photo/stage/16.jpg" aria-label="Open stage 16">
+        <img src="/assets/images/photo/stage/16.jpg" alt="Stage 16" loading="lazy">
+      </button>
+
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">© 2026 Baritone. Dominic Lim</div>
+</footer>
+
+<!-- Lightbox viewer (same as Portrait) -->
+<div class="plb" data-plb aria-hidden="true">
+  <button class="plb-close" type="button" aria-label="Close" data-plb-close>CLOSE</button>
+  <button class="plb-nav prev" type="button" aria-label="Previous" data-plb-prev>‹</button>
+
+  <figure class="plb-stage" aria-label="Image viewer">
+    <img class="plb-img" data-plb-img alt="">
+  </figure>
+
+  <button class="plb-nav next" type="button" aria-label="Next" data-plb-next>›</button>
+</div>
+
+<script src="/assets/site.js"></script>
+
+<script>
+(function(){
+  const tiles = Array.from(document.querySelectorAll(".ptile"));
+  const lb = document.querySelector("[data-plb]");
+  const lbImg = document.querySelector("[data-plb-img]");
+  const btnClose = document.querySelector("[data-plb-close]");
+  const btnPrev = document.querySelector("[data-plb-prev]");
+  const btnNext = document.querySelector("[data-plb-next]");
+
+  if (!tiles.length || !lb || !lbImg) return;
+
+  const srcs = tiles.map(t => t.getAttribute("data-src"));
+  let idx = 0;
+
+  function openAt(i){
+    idx = (i + srcs.length) % srcs.length;
+    lbImg.src = srcs[idx];
+    lbImg.alt = tiles[idx].querySelector("img")?.alt || `Stage ${idx+1}`;
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close(){
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    lbImg.removeAttribute("src");
+  }
+
+  function next(){ openAt(idx + 1); }
+  function prev(){ openAt(idx - 1); }
+
+  tiles.forEach((t, i) => t.addEventListener("click", () => openAt(i)));
+  btnClose && btnClose.addEventListener("click", close);
+  btnNext && btnNext.addEventListener("click", next);
+  btnPrev && btnPrev.addEventListener("click", prev);
+
+  lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+
+  window.addEventListener("keydown", (e) => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") next();
+    if (e.key === "ArrowLeft") prev();
+  });
+
+  let sx = 0, sy = 0;
+  lb.addEventListener("touchstart", (e) => {
+    sx = e.touches[0].clientX;
+    sy = e.touches[0].clientY;
+  }, {passive:true});
+  lb.addEventListener("touchend", (e) => {
+    if (!lb.classList.contains("open")) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    const dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    dx < 0 ? next() : prev();
+  }, {passive:true});
+})();
+</script>
+
+</body>
+</html>
