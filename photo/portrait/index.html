@@ -4,19 +4,19 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>PORTRAIT — Baritone. Dominic Lim</title>
-
-  <!-- ✅ Correct paths from /photo/portrait/ to /assets -->
-  <link rel="stylesheet" href="../../assets/styles.css"/>
-  <link rel="icon" href="data:,">
   <meta name="description" content="Baritone. Dominic Lim — artist portfolio"/>
+  <link rel="icon" href="data:,">
 
-  <!-- Libre Bodoni Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <!-- ✅ IMPORTANT: correct relative path from /photo/portrait/ to /assets -->
+  <link rel="stylesheet" href="../../assets/styles.css"/>
 
+  <!-- ✅ Hard fail-safe: prevent blank page if any JS tries to hide body -->
   <style>
-    /* --- Lightbox (only this page) --- */
+    html, body { visibility: visible !important; opacity: 1 !important; }
+    /* If your global CSS uses a "js" class to hide until load, this defeats it */
+    body { display: block !important; }
+
+    /* Lightbox (only this page) */
     .plb{
       position: fixed;
       inset: 0;
@@ -88,10 +88,7 @@
 
     @media (max-width: 640px){
       .plb{ padding: 14px; }
-      .plb-stage{
-        width: 96vw;
-        height: 82vh;
-      }
+      .plb-stage{ width: 96vw; height: 82vh; }
       .plb-nav{ width: 40px; height: 40px; line-height: 40px; }
     }
   </style>
@@ -100,7 +97,6 @@
 <body>
 <header>
   <div class="container navbar">
-    <!-- ✅ Home link -->
     <a class="brand" href="../../">Baritone. Dominic Lim</a>
 
     <nav class="navlinks" aria-label="Primary">
@@ -139,6 +135,7 @@
   <div class="container">
     <h1 class="page-title">Portrait</h1>
 
+    <!-- ✅ Your CSS will style .pg and .ptile -->
     <section class="pg" aria-label="Portrait grid">
       <button class="ptile" type="button" data-src="../../assets/images/photo/portrait/1.jpg" aria-label="Open portrait 1">
         <img src="../../assets/images/photo/portrait/1.jpg" alt="Portrait 1" loading="lazy">
@@ -199,10 +196,28 @@
   <button class="plb-nav next" type="button" aria-label="Next" data-plb-next>›</button>
 </div>
 
-<!-- ✅ Correct JS path -->
-<script src="../../assets/site.js"></script>
+<script>
+/* ✅ Drawer toggle (self-contained; does not rely on assets/site.js) */
+(function(){
+  const btn = document.querySelector("[data-hamburger]");
+  const drawer = document.querySelector("[data-drawer]");
+  const closeLinks = document.querySelectorAll("[data-close-drawer]");
+  if (!btn || !drawer) return;
+
+  function open(){ drawer.classList.add("open"); }
+  function close(){ drawer.classList.remove("open"); }
+
+  btn.addEventListener("click", () => {
+    drawer.classList.contains("open") ? close() : open();
+  });
+
+  closeLinks.forEach(a => a.addEventListener("click", close));
+  drawer.addEventListener("click", (e) => { if (e.target === drawer) close(); });
+})();
+</script>
 
 <script>
+/* ✅ Lightbox (self-contained) */
 (function(){
   const tiles = Array.from(document.querySelectorAll(".ptile"));
   const lb = document.querySelector("[data-plb]");
