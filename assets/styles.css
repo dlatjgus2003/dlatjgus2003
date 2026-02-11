@@ -1904,3 +1904,39 @@ body[data-page="video"] .video-frame {
   width: 100% !important;
   max-width: 100% !important;
 }
+
+/* =========================================================
+   VIDEO LIGHTBOX: 오른쪽 텍스트(라벨/제목) 패널 숨기기
+   - site.js에서 쓰는 data-vlb / data-vlb-yt 기준으로만 적용
+========================================================= */
+
+/* 1) 오버레이 내부에서 "텍스트 패널"로 보이는 요소들을 최대한 폭넓게 숨김 */
+[data-vlb] [class*="side"],
+[data-vlb] [class*="meta"],
+[data-vlb] [class*="info"],
+[data-vlb] [class*="text"],
+[data-vlb] [class*="label"],
+[data-vlb] [class*="title"] {
+  display: none !important;
+}
+
+/* 2) 대신 iframe 플레이어는 반드시 보이게(위 규칙에 말려들 수 있어서 강제) */
+[data-vlb] [data-vlb-yt],
+[data-vlb] iframe {
+  display: block !important;
+}
+
+/* 3) 혹시 2컬럼 grid/flex로 잡혀 있던 레이아웃을 1컬럼으로 강제 */
+[data-vlb] [class*="grid"],
+[data-vlb] [class*="layout"],
+[data-vlb] [class*="wrap"],
+[data-vlb] [class*="inner"] {
+  grid-template-columns: 1fr !important;
+}
+
+/* 4) 플레이어가 전체 폭을 안정적으로 차지하게 */
+[data-vlb] [data-vlb-yt],
+[data-vlb] iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+}
