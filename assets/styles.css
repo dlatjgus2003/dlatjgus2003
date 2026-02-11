@@ -1730,3 +1730,55 @@ body[data-page="video"] .vlb .vlb-title{
   opacity: 1;
   transform: translateY(0);
 }
+
+/* =========================
+   PHOTO hover interaction
+   ========================= */
+
+/* 기본 상태 */
+.ptile{
+  position: relative;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    filter .35s ease;
+}
+
+/* 이미지 자체 */
+.ptile img{
+  transition: transform .5s ease, filter .35s ease;
+}
+
+/* Hover / Focus (마우스, 키보드 접근성 포함) */
+.ptile:hover,
+.ptile:focus-visible{
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+}
+
+/* 이미지에 살짝 강조 */
+.ptile:hover img,
+.ptile:focus-visible img{
+  transform: scale(1.05);
+  filter: brightness(1.05) contrast(1.02);
+}
+
+/* 클릭 가능하다는 시각적 힌트 (커서) */
+.ptile{
+  cursor: zoom-in;
+}
+
+/* 터치 디바이스에서는 과한 hover 제거 */
+@media (hover: none){
+  .ptile:hover,
+  .ptile:focus-visible{
+    transform: none;
+    box-shadow: none;
+  }
+
+  .ptile:hover img,
+  .ptile:focus-visible img{
+    transform: none;
+    filter: none;
+  }
+}
