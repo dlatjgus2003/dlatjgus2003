@@ -1685,7 +1685,9 @@ body[data-page="video"] .vlb .vlb-title{
   color: #fff !important;
 }
 
-/* PHOTO (portrait/stage) grid fix */
+/* PHOTO (portrait/stage) grid fix — SAFE VERSION */
+
+/* grid */
 .pg{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1693,29 +1695,38 @@ body[data-page="video"] .vlb .vlb-title{
   align-items: stretch;
 }
 
+/* ✅ 기본 상태: 무조건 보이게 */
 .ptile{
   border: 0;
   padding: 0;
-  background: transparent;   /* 흰 박스 제거 */
-  box-shadow: none;          /* 흰 박스/그림자 제거 */
+  background: transparent;
+  box-shadow: none;
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
 
-  transform: translateY(12px);
-  opacity: 0;
-  transition: transform .6s ease, opacity .6s ease;
-}
-
-.reveal.is-visible .ptile,
-.ptile.is-visible{
-  transform: translateY(0);
+  /* ✅ 핵심: 기본은 보이게 */
   opacity: 1;
+  transform: none;
 }
 
+/* image fill */
 .ptile img{
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background: transparent;
+  border: 0;
+}
+
+/* ✅ 애니메이션은 "원할 때만": reveal을 붙인 섹션에서만 */
+.reveal .ptile{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: transform .6s ease, opacity .6s ease;
+}
+.reveal.is-visible .ptile{
+  opacity: 1;
+  transform: translateY(0);
 }
