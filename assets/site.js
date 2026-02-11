@@ -223,6 +223,9 @@ function initHomeVideoPreview(){
     a.className = "home-video-card";
     a.href = "video/";
 
+    /* ✅ [수정 1] 홈 카드에 실제 유튜브 링크를 심어둔다 (라이트박스용) */
+    a.setAttribute("data-youtube", v.youtube);
+
     // 썸네일 로드 실패 시 fallback
     const thumb = ytThumbById(v.id);
 
@@ -359,13 +362,17 @@ onReady(() => {
 
 /* =========================
    HOME VIDEO → LIGHTBOX
+   ✅ 메인 비디오 카드 클릭 시 video/로 이동하지 않고 바로 재생
 ========================= */
 
 (function(){
   const lb = document.querySelector("[data-vlb]");
   const yt = document.querySelector("[data-vlb-yt]");
   const closeBtn = document.querySelector("[data-vlb-close]");
-  if (!lb || !yt) return;
+  const mount = document.getElementById("homeVideoPreview");
+
+  /* ✅ [수정 2] closeBtn, mount까지 체크 (다른 페이지에서 오류 방지) */
+  if (!lb || !yt || !closeBtn || !mount) return;
 
   function ytEmbed(url){
     const id =
@@ -393,22 +400,19 @@ onReady(() => {
     if (e.target === lb) close();
   });
 
-  // 홈 비디오 주입 이후 클릭 가로채기
-  const bind = () => {
-    document
-      .querySelectorAll("#homeVideoPreview [data-video-index]")
-      .forEach(el => {
-        const idx = Number(el.dataset.videoIndex);
-        const v = window.VIDEO_DB?.[idx];
-        if (!v?.youtube) return;
+  window.addEventListener("keydown", (e) => {
+    if(e.key === "Escape" && lb.classList.contains("open")) close();
+  });
 
-        el.addEventListener("click", e => {
-          e.preventDefault();
-          open(v.youtube);
-        });
-      });
-  };
+  /* ✅ [수정 3] 이벤트 위임: 주입된 .home-video-card 클릭을 가로채서 data-youtube로 연다 */
+  mount.addEventListener("click", (e) => {
+    const card = e.target.closest("[data-youtube]");
+    if(!card) return;
 
-  setTimeout(bind, 50);
-  setTimeout(bind, 200);
+    e.preventDefault();     // video/ 이동 막기
+    e.stopPropagation();
+
+    const url = card.getAttribute("data-youtube");
+    if(url) open(url);
+  });
 })();
