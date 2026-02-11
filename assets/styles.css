@@ -1962,3 +1962,54 @@ body[data-page="video"] .video-frame {
   width: 100% !important;
   max-width: 100% !important;
 }
+
+/* =========================================================
+   HEADER HEIGHT — unify across ALL pages (including /video/)
+   붙여넣기 위치: assets/styles.css 맨 아래
+========================================================= */
+
+/* 1) header 기본 높이/패딩 통일 */
+header .navbar{
+  min-height: 72px;            /* 원하는 고정 높이 (필요하면 68~80 사이로 조절) */
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* 2) 텍스트가 높이를 밀어올리지 않게 line-height 정리 */
+header .brand,
+header .navlinks a,
+header .hamburger{
+  line-height: 1 !important;
+}
+
+/* 3) 링크/버튼 자체 패딩이 페이지별로 달라져도 헤더 높이를 흔들지 않게 */
+header .navlinks a{
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+header .brand{
+  display: inline-flex;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+header .hamburger{
+  display: inline-flex;
+  align-items: center;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+/* 4) 드롭다운 트리거도 동일하게 */
+header .dropdown-trigger{
+  display: inline-flex;
+  align-items: center;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
