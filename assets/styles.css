@@ -2001,3 +2001,32 @@ select{
 ::placeholder{
   color: rgba(255,255,255,0.6);
 }
+
+/* =========================================================
+   OPERA & SONG CYCLE — Composer spacing
+   (ONLY these two pages)
+========================================================= */
+
+/* 작곡가 블록 간 간격 */
+body[data-page="opera"] .listblock,
+body[data-page="songcycle"] .listblock{
+  margin-bottom: 48px;
+}
+
+/* 작곡가 이름(h3)과 곡 리스트 사이 */
+body[data-page="opera"] .listblock h3,
+body[data-page="songcycle"] .listblock h3{
+  margin: 0 0 16px;
+}
+
+/* 곡 항목 간 간격 */
+body[data-page="opera"] .bullets li,
+body[data-page="songcycle"] .bullets li{
+  margin-bottom: 8px;
+}
+
+/* 마지막 곡은 여백 제거 */
+body[data-page="opera"] .bullets li:last-child,
+body[data-page="songcycle"] .bullets li:last-child{
+  margin-bottom: 0;
+}
