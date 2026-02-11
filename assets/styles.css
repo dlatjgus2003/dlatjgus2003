@@ -2010,7 +2010,7 @@ select{
 /* 작곡가 블록 간 간격 */
 body[data-page="opera"] .listblock,
 body[data-page="songcycle"] .listblock{
-  margin-bottom: 48px;
+  margin-bottom: 60px;
 }
 
 /* 작곡가 이름(h3)과 곡 리스트 사이 */
