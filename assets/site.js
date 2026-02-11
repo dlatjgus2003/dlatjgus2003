@@ -221,7 +221,7 @@ function initHomeVideoPreview(){
   picked.forEach(v => {
     const a = document.createElement("a");
     a.className = "home-video-card";
-    a.href = "/video/";
+    a.href = "video/";
 
     // 썸네일 로드 실패 시 fallback
     const thumb = ytThumbById(v.id);
