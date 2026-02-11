@@ -1684,3 +1684,38 @@ body[data-page="video"] .vlb .vlb-label,
 body[data-page="video"] .vlb .vlb-title{
   color: #fff !important;
 }
+
+/* PHOTO (portrait/stage) grid fix */
+.pg{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.ptile{
+  border: 0;
+  padding: 0;
+  background: transparent;   /* 흰 박스 제거 */
+  box-shadow: none;          /* 흰 박스/그림자 제거 */
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform .6s ease, opacity .6s ease;
+}
+
+.reveal.is-visible .ptile,
+.ptile.is-visible{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.ptile img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
