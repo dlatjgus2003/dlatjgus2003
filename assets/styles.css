@@ -1940,3 +1940,25 @@ body[data-page="video"] .video-frame {
   width: 100% !important;
   max-width: 100% !important;
 }
+
+/* =========================================================
+   VIDEO LIGHTBOX: 오른쪽 텍스트 완전 제거
+   (vlb = video lightbox)
+========================================================= */
+
+.vlb-meta {
+  display: none !important;
+}
+
+/* 레이아웃이 2컬럼으로 잡혀 있었다면 1컬럼으로 정리 */
+.vlb-stage {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 영상 영역을 전체 폭으로 */
+.vlb-frame {
+  width: 100% !important;
+  max-width: 100% !important;
+}
