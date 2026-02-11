@@ -1782,3 +1782,49 @@ body[data-page="video"] .vlb .vlb-title{
     filter: none;
   }
 }
+
+/* =========================
+   VIDEO LIGHTBOX (HOME)
+========================= */
+
+.vlb{
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.88);
+  backdrop-filter: blur(8px);
+}
+
+.vlb.open{ display:flex; }
+
+.vlb-stage{
+  width: min(92vw, 1100px);
+  height: min(80vh, 620px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vlb-yt{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 12px;
+  background: #000;
+}
+
+.vlb-close{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: .12em;
+}
