@@ -1877,3 +1877,30 @@ body[data-page="video"] .vlb .vlb-title{
   text-transform: uppercase;
 }
 .vlb-close:hover{ background: rgba(255,255,255,.18); }
+
+/* =========================================================
+   VIDEO TAB – Hide side text panel
+   (keep video player only)
+========================================================= */
+
+/* 비디오 페이지에서만 적용 */
+body[data-page="video"] .video-side,
+body[data-page="video"] .video-meta,
+body[data-page="video"] .video-text,
+body[data-page="video"] .video-info {
+  display: none !important;
+}
+
+/* 혹시 grid / flex로 공간을 차지하고 있다면 */
+body[data-page="video"] .video-layout {
+  grid-template-columns: 1fr !important;
+  display: block !important;
+}
+
+/* 플레이어가 전체 폭을 차지하도록 */
+body[data-page="video"] .video-player,
+body[data-page="video"] iframe,
+body[data-page="video"] .video-frame {
+  width: 100% !important;
+  max-width: 100% !important;
+}
