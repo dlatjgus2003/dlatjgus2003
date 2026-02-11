@@ -17,97 +17,168 @@
 </head>
 
 <body data-page="home">
+  <!-- =========================
+       HEADER
+  ========================== -->
+  <header>
+    <div class="container navbar">
+      <a class="brand" href="">Baritone. Dominic Lim</a>
 
-<header>
-  <div class="container navbar">
-    <a class="brand" href="">Baritone. Dominic Lim</a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="bio/">BIO</a>
+        <a href="repertoire/">REPERTOIRE</a>
 
-    <nav class="navlinks">
-      <a href="bio/">BIO</a>
-      <a href="repertoire/">REPERTOIRE</a>
-
-      <div class="dropdown">
-        <a class="dropdown-trigger" href="photo/portrait/">PHOTO</a>
-        <div class="dropdown-menu">
-          <a href="photo/portrait/">PORTRAIT</a>
-          <a href="photo/stage/">STAGE</a>
+        <div class="dropdown">
+          <a class="dropdown-trigger" href="photo/portrait/" aria-haspopup="true" aria-expanded="false">PHOTO</a>
+          <div class="dropdown-menu" role="menu" aria-label="Photo">
+            <a role="menuitem" href="photo/portrait/">PORTRAIT</a>
+            <a role="menuitem" href="photo/stage/">STAGE</a>
+          </div>
         </div>
-      </div>
 
-      <a href="video/">VIDEO</a>
-      <a href="contact/">CONTACT</a>
-    </nav>
+        <a href="video/">VIDEO</a>
+        <a href="contact/">CONTACT</a>
+      </nav>
 
-    <button class="hamburger" data-hamburger>MENU</button>
+      <button class="hamburger" type="button" data-hamburger>MENU</button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" data-drawer>
+    <div class="panel">
+      <a data-close-drawer href="bio/">BIO</a>
+      <a data-close-drawer href="repertoire/">REPERTOIRE</a>
+      <a data-close-drawer href="photo/portrait/">PHOTO</a>
+      <a class="sub" data-close-drawer href="photo/portrait/">PORTRAIT</a>
+      <a class="sub" data-close-drawer href="photo/stage/">STAGE</a>
+      <a data-close-drawer href="video/">VIDEO</a>
+      <a data-close-drawer href="contact/">CONTACT</a>
+    </div>
   </div>
-</header>
 
-<div class="mobile-drawer" data-drawer>
-  <div class="panel">
-    <a data-close-drawer href="bio/">BIO</a>
-    <a data-close-drawer href="repertoire/">REPERTOIRE</a>
-    <a data-close-drawer href="photo/portrait/">PHOTO</a>
-    <a class="sub" data-close-drawer href="photo/portrait/">PORTRAIT</a>
-    <a class="sub" data-close-drawer href="photo/stage/">STAGE</a>
-    <a data-close-drawer href="video/">VIDEO</a>
-    <a data-close-drawer href="contact/">CONTACT</a>
+  <!-- =========================
+       MAIN
+  ========================== -->
+  <main>
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="hero reveal" aria-label="Hero">
+        <img
+          src="assets/images/img/main.jpg"
+          alt="Dominic Lim portrait"
+          loading="eager"
+          decoding="async"
+        />
+      </section>
+
+      <!-- VIDEO PREVIEW -->
+      <section class="reveal home-video">
+        <div class="home-video-head">
+          <h2 class="section-title" style="margin:0;">Video</h2>
+          <a class="home-video-more" href="video/">View all video →</a>
+        </div>
+
+        <!-- site.js가 여기로 최신 비디오 2개 주입 -->
+        <div class="home-video-grid" id="homeVideoPreview"></div>
+      </section>
+
+      <!-- UPCOMING & REPERTOIRE -->
+      <section class="reveal">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+          <h2 class="section-title" style="margin:0;">Upcoming &amp; Repertoire</h2>
+          <a href="repertoire/" style="font-size:12px; letter-spacing:.14em; text-transform:uppercase;">
+            View all repertoire →
+          </a>
+        </div>
+
+        <div class="split" style="margin-top:12px;">
+          <div class="listblock" style="margin:0;">
+            <h3 style="margin:0 0 10px; font-size:16px; letter-spacing:.12em; text-transform:uppercase;">Upcoming</h3>
+            <ul class="bullets">
+              <li><strong>2026 March</strong> — L'elisir d'amore (Choir / Belcore cover)</li>
+              <li><strong>2026 May</strong> — La cambiale di matrimonio (Slook)</li>
+              <li><strong>2026 Dec</strong> — Coronation Mass by W. A. Mozart (Bass soloist)</li>
+            </ul>
+          </div>
+
+          <div class="listblock" style="margin:0;">
+            <h3 style="margin:0 0 10px; font-size:16px; letter-spacing:.12em; text-transform:uppercase;">Repertoire preview</h3>
+            <ul class="bullets">
+              <li>W. A. Mozart — Don Giovanni (Leporello)</li>
+              <li>W. A. Mozart — Le nozze di Figaro (Figaro / Conte)</li>
+              <li>G. Donizetti — L'elisir d'amore (Belcore)</li>
+              <li>G. Puccini — Gianni Schicchi (Gianni Schicchi)</li>
+              <li>Oratorio &amp; Lied</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="reveal">
+        <h2 class="section-title" style="margin:0 0 12px;">Contact</h2>
+
+        <div class="listblock" style="margin:0;">
+          <ul class="bullets">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:dlatjgus2003@naver.com">dlatjgus2003@naver.com</a>
+            </li>
+            <li>
+              <strong>Resume:</strong>
+              <a href="assets/resume/Dominic_Lim_Resume.pdf" target="_blank" rel="noopener">
+                Download PDF
+              </a>
+            </li>
+            <li>
+              <strong>Instagram:</strong>
+              <a href="https://www.instagram.com/dominico_lim/" target="_blank" rel="noopener">
+                @dominico_lim
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Baritone. Dominic Lim
+    </div>
+  </footer>
+
+  <!-- =========================
+       VIDEO LIGHTBOX (HTML only)
+       → JS / CSS는 네가 추가
+  ========================== -->
+  <div class="vlb" data-vlb aria-hidden="true">
+    <button class="vlb-close" type="button" data-vlb-close aria-label="Close">CLOSE</button>
+    <div class="vlb-stage" role="dialog" aria-label="Video player">
+      <iframe
+        class="vlb-yt"
+        data-vlb-yt
+        title="YouTube video player"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
-</div>
 
-<main>
-  <div class="container">
+  <!-- =========================
+       SCRIPTS
+  ========================== -->
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 
-    <!-- HERO -->
-    <section class="hero reveal">
-      <img src="assets/images/img/main.jpg" alt="Dominic Lim">
-    </section>
-
-    <!-- VIDEO PREVIEW -->
-    <section class="reveal home-video">
-      <div class="home-video-head">
-        <h2 class="section-title">Video</h2>
-        <a class="home-video-more" href="video/">View all video →</a>
-      </div>
-
-      <!-- site.js가 최신 featured 영상 2개 주입 -->
-      <div class="home-video-grid" id="homeVideoPreview"></div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  <div class="container">
-    © <span id="y"></span> Baritone. Dominic Lim
-  </div>
-</footer>
-
-<script>
-  document.getElementById("y").textContent = new Date().getFullYear();
-</script>
-
-<!-- VIDEO DB -->
-<script src="assets/data/videos.js"></script>
-
-<!-- SITE JS -->
-<script src="assets/site.js"></script>
-
-<!-- =========================
-     VIDEO LIGHTBOX (GLOBAL)
-========================== -->
-<div class="vlb" data-vlb aria-hidden="true">
-  <button class="vlb-close" data-vlb-close>CLOSE</button>
-
-  <div class="vlb-stage">
-    <iframe
-      class="vlb-yt"
-      data-vlb-yt
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-      title="Video player">
-    </iframe>
-  </div>
-</div>
-
+  <script src="assets/data/videos.js"></script>
+  <script src="assets/site.js"></script>
 </body>
 </html>
