@@ -1963,3 +1963,41 @@ body[data-page="video"] .video-frame {
   max-width: 100% !important;
 }
 
+/* =========================================================
+   GLOBAL TEXT COLOR — force white
+========================================================= */
+
+html, body{
+  color: #ffffff;
+}
+
+/* 일반 텍스트 */
+p, span, li, strong, em, small, blockquote,
+h1, h2, h3, h4, h5, h6{
+  color: #ffffff;
+}
+
+/* 링크 */
+a{
+  color: #ffffff;
+}
+a:visited{
+  color: #ffffff;
+}
+a:hover,
+a:focus{
+  color: #ffffff;
+}
+
+/* 버튼/폼 텍스트 */
+button,
+input,
+textarea,
+select{
+  color: #ffffff;
+}
+
+/* placeholder (브라우저별) */
+::placeholder{
+  color: rgba(255,255,255,0.6);
+}
