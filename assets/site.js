@@ -356,3 +356,59 @@ onReady(() => {
   modal.addEventListener('click', (e) => { if(e.target === modal) close(); });
   window.addEventListener('keydown', (e) => { if(e.key === 'Escape') close(); });
 })();
+
+/* =========================
+   HOME VIDEO → LIGHTBOX
+========================= */
+
+(function(){
+  const lb = document.querySelector("[data-vlb]");
+  const yt = document.querySelector("[data-vlb-yt]");
+  const closeBtn = document.querySelector("[data-vlb-close]");
+  if (!lb || !yt) return;
+
+  function ytEmbed(url){
+    const id =
+      url.match(/youtu\.be\/([^?]+)/)?.[1] ||
+      url.match(/[?&]v=([^&]+)/)?.[1];
+    return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : "";
+  }
+
+  function open(url){
+    const src = ytEmbed(url);
+    if (!src) return;
+    yt.src = src;
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close(){
+    lb.classList.remove("open");
+    yt.src = "";
+    document.body.style.overflow = "";
+  }
+
+  closeBtn.addEventListener("click", close);
+  lb.addEventListener("click", e => {
+    if (e.target === lb) close();
+  });
+
+  // 홈 비디오 주입 이후 클릭 가로채기
+  const bind = () => {
+    document
+      .querySelectorAll("#homeVideoPreview [data-video-index]")
+      .forEach(el => {
+        const idx = Number(el.dataset.videoIndex);
+        const v = window.VIDEO_DB?.[idx];
+        if (!v?.youtube) return;
+
+        el.addEventListener("click", e => {
+          e.preventDefault();
+          open(v.youtube);
+        });
+      });
+  };
+
+  setTimeout(bind, 50);
+  setTimeout(bind, 200);
+})();
