@@ -2080,3 +2080,73 @@ body[data-page="songcycle"] .bullets li:last-child{
   header .brand{ flex: 0 0 auto; }
   header .navlinks{ flex: 1 1 auto; min-width: 0; }
 }
+
+/* =========================================================
+   MOBILE HEADER — 3 LINE LAYOUT
+   Baritone. Dominic Lim
+   BIO REPERTOIRE
+   PHOTO VIDEO CONTACT
+========================================================= */
+@media (max-width: 768px){
+
+  /* 전체 헤더 기본 정리 */
+  header .navbar{
+    display: flex;
+    flex-direction: column;     /* 세로 스택 */
+    align-items: flex-start;    /* 왼쪽 정렬 */
+    gap: 6px;
+  }
+
+  /* 1️⃣ 브랜드 (맨 윗줄) */
+  header .brand{
+    font-size: 18px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    margin-bottom: 6px;
+  }
+
+  /* nav 전체를 세로 그룹으로 */
+  header .navlinks{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+  }
+
+  /* 2️⃣ 두 번째 줄: BIO / REPERTOIRE */
+  header .navlinks a:nth-child(1),
+  header .navlinks a:nth-child(2){
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: .16em;
+    margin-right: 14px;
+  }
+
+  /* 이 둘을 한 줄로 묶기 */
+  header .navlinks a:nth-child(1),
+  header .navlinks a:nth-child(2){
+    line-height: 1.4;
+  }
+
+  /* 3️⃣ 세 번째 줄: PHOTO / VIDEO / CONTACT */
+  header .navlinks a:nth-child(3),
+  header .navlinks a:nth-child(4),
+  header .navlinks a:nth-child(5){
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: .16em;
+    margin-right: 14px;
+  }
+
+  /* 줄 분리를 위해 가상 줄바꿈 */
+  header .navlinks a:nth-child(3){
+    margin-top: 6px;
+  }
+
+  /* 햄버거 / 모바일 드로어 제거 */
+  .hamburger,
+  .mobile-drawer{
+    display: none !important;
+  }
+}
