@@ -2289,9 +2289,34 @@ body[data-page="songcycle"] .bullets li:last-child{
   header .navlinks > a:nth-of-type(4){
     grid-column: 2; grid-row: 2; /* CONTACT */
   }
+}
 
-  /* PHOTO 드롭다운 비활성 (모바일) */
+/* ===============================
+   MOBILE PHOTO DROPDOWN FIX
+   =============================== */
+@media (max-width: 768px){
+
+  /* dropdown 부모 기준점 */
+  header .dropdown{
+    position: relative;
+  }
+
+  /* 기본적으로 숨김 */
   header .dropdown-menu{
-    display: none !important;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #000;
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+  }
+
+  /* 모바일에서 탭하면 보이게 (hover + focus) */
+  header .dropdown:hover .dropdown-menu,
+  header .dropdown:focus-within .dropdown-menu{
+    display: flex;
   }
 }
