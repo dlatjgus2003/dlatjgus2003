@@ -2211,10 +2211,6 @@ body[data-page="songcycle"] .bullets li:last-child{
   header .navlinks > a:nth-of-type(3){ grid-column: 2; grid-row: 2; } /* VIDEO */
   header .navlinks > a:nth-of-type(4){ grid-column: 3; grid-row: 2; } /* CONTACT */
 
-  /* 드롭다운 메뉴는 모바일에서 펼쳐져 보이지 않게(원하면 유지 가능) */
-  header .dropdown-menu{
-    display: none !important;
-  }
 }
 
 /* =========================================================
