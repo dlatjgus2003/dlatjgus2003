@@ -2216,3 +2216,69 @@ body[data-page="songcycle"] .bullets li:last-child{
     display: none !important;
   }
 }
+
+/* =========================================================
+   MOBILE HEADER — EXACT 3 LINES
+   1) Baritone. Dominic Lim
+   2) BIO  REPERTOIRE
+   3) PHOTO  VIDEO  CONTACT
+========================================================= */
+@media (max-width: 768px){
+
+  /* MENU/드로어는 안 씀 */
+  .hamburger,
+  .mobile-drawer{
+    display: none !important;
+  }
+
+  /* 헤더 전체: 왼쪽 정렬 */
+  header .navbar{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  /* 1줄: 브랜드 */
+  header .brand{
+    white-space: nowrap !important;
+    font-size: 18px !important;
+    line-height: 1.1 !important;
+    margin: 0 !important;
+  }
+
+  /* 2~3줄: nav를 "2행 그리드"로 강제 */
+  header .navlinks{
+    display: grid !important;
+    grid-template-columns: repeat(3, max-content) !important; /* 3칸 */
+    grid-auto-rows: auto !important;
+    column-gap: 14px !important;
+    row-gap: 8px !important;
+    justify-content: start !important;  /* 왼쪽 정렬 */
+    align-items: center !important;
+  }
+
+  /* 링크 공통 스타일 */
+  header .navlinks > a,
+  header .navlinks .dropdown-trigger{
+    font-size: 13px !important;
+    letter-spacing: .16em !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-block !important;
+  }
+
+  /* ✅ 2번째 줄(1행): BIO, REPERTOIRE만 왼쪽에 두고 나머지 칸 비우기 */
+  header .navlinks > a:nth-of-type(1){ grid-column: 1; grid-row: 1; } /* BIO */
+  header .navlinks > a:nth-of-type(2){ grid-column: 2; grid-row: 1; } /* REPERTOIRE */
+
+  /* ✅ 3번째 줄(2행): PHOTO, VIDEO, CONTACT */
+  header .navlinks .dropdown{ grid-column: 1; grid-row: 2; }          /* PHOTO */
+  header .navlinks > a:nth-of-type(3){ grid-column: 2; grid-row: 2; } /* VIDEO */
+  header .navlinks > a:nth-of-type(4){ grid-column: 3; grid-row: 2; } /* CONTACT */
+
+  /* 드롭다운 메뉴는 모바일에서 펼쳐져 보이지 않게(원하면 유지 가능) */
+  header .dropdown-menu{
+    display: none !important;
+  }
+}
