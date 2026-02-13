@@ -2218,66 +2218,79 @@ body[data-page="songcycle"] .bullets li:last-child{
 }
 
 /* =========================================================
-   MOBILE HEADER — EXACT 3 LINES
-   1) Baritone. Dominic Lim
-   2) BIO  REPERTOIRE
-   3) PHOTO  VIDEO  CONTACT
+   MOBILE HEADER — SPACING & 2-LINE NAV (FINAL)
 ========================================================= */
 @media (max-width: 768px){
 
-  /* MENU/드로어는 안 씀 */
+  /* 모바일 메뉴 버튼/드로어 완전 제거 */
   .hamburger,
   .mobile-drawer{
     display: none !important;
   }
 
-  /* 헤더 전체: 왼쪽 정렬 */
+  /* 헤더 전체 여백 + 왼쪽 정렬 */
+  header{
+    padding-top: 18px !important; /* 🔹 화면 맨 위 여백 */
+  }
+
   header .navbar{
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 6px !important;
+    gap: 14px !important; /* 🔹 브랜드 ↔ 메뉴 간격 */
   }
 
-  /* 1줄: 브랜드 */
+  /* 1줄: Baritone. Dominic Lim */
   header .brand{
-    white-space: nowrap !important;
     font-size: 18px !important;
-    line-height: 1.1 !important;
-    margin: 0 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    margin-bottom: 6px !important; /* 🔹 브랜드 아래 여백 */
   }
 
-  /* 2~3줄: nav를 "2행 그리드"로 강제 */
+  /* 2~3줄: 네비게이션 (2행 고정) */
   header .navlinks{
     display: grid !important;
-    grid-template-columns: repeat(3, max-content) !important; /* 3칸 */
-    grid-auto-rows: auto !important;
-    column-gap: 14px !important;
-    row-gap: 8px !important;
-    justify-content: start !important;  /* 왼쪽 정렬 */
-    align-items: center !important;
+    grid-template-columns: repeat(3, max-content) !important;
+    grid-template-rows: auto auto !important;
+    column-gap: 16px !important; /* 가로 간격 */
+    row-gap: 12px !important;    /* 🔹 줄 간격 (가독성 핵심) */
+    justify-content: start !important;
   }
 
-  /* 링크 공통 스타일 */
+  /* 링크 공통 */
   header .navlinks > a,
   header .navlinks .dropdown-trigger{
     font-size: 13px !important;
-    letter-spacing: .16em !important;
+    letter-spacing: .18em !important;
     padding: 0 !important;
     margin: 0 !important;
-    display: inline-block !important;
+    line-height: 1.4 !important;
   }
 
-  /* ✅ 2번째 줄(1행): BIO, REPERTOIRE만 왼쪽에 두고 나머지 칸 비우기 */
-  header .navlinks > a:nth-of-type(1){ grid-column: 1; grid-row: 1; } /* BIO */
-  header .navlinks > a:nth-of-type(2){ grid-column: 2; grid-row: 1; } /* REPERTOIRE */
+  /* ===== 2번째 줄 ===== */
+  header .navlinks > a:nth-of-type(1){
+    grid-column: 1; grid-row: 1; /* BIO */
+  }
 
-  /* ✅ 3번째 줄(2행): PHOTO, VIDEO, CONTACT */
-  header .navlinks .dropdown{ grid-column: 1; grid-row: 2; }          /* PHOTO */
-  header .navlinks > a:nth-of-type(3){ grid-column: 2; grid-row: 2; } /* VIDEO */
-  header .navlinks > a:nth-of-type(4){ grid-column: 3; grid-row: 2; } /* CONTACT */
+  header .navlinks > a:nth-of-type(2){
+    grid-column: 2; grid-row: 1; /* REPERTOIRE */
+  }
 
-  /* 드롭다운 메뉴는 모바일에서 펼쳐져 보이지 않게(원하면 유지 가능) */
+  header .navlinks .dropdown{
+    grid-column: 3; grid-row: 1; /* PHOTO */
+  }
+
+  /* ===== 3번째 줄 ===== */
+  header .navlinks > a:nth-of-type(3){
+    grid-column: 1; grid-row: 2; /* VIDEO */
+  }
+
+  header .navlinks > a:nth-of-type(4){
+    grid-column: 2; grid-row: 2; /* CONTACT */
+  }
+
+  /* PHOTO 드롭다운 비활성 (모바일) */
   header .dropdown-menu{
     display: none !important;
   }
