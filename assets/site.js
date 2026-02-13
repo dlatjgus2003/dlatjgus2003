@@ -416,3 +416,17 @@ onReady(() => {
     if(url) open(url);
   });
 })();
+
+/* =========================================
+   Mobile: View Resume open in new tab
+========================================= */
+(function () {
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  if (!isMobile) return;
+
+  const resumeLinks = document.querySelectorAll(".resume-link");
+  resumeLinks.forEach(link => {
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
+  });
+})();
