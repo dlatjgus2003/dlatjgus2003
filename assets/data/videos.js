@@ -18,7 +18,7 @@ window.VIDEO_DB = [
     title: "산촌",
     label: "REHEARSAL",
     featured: true
-  }
+  },
   
   {
     youtube: "https://youtu.be/QTh3TUElaok?si=jT2Lm2TnDr6f-Wov",
