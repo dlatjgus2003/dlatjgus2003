@@ -13,6 +13,27 @@
  */
 
 window.VIDEO_DB = [
+ {
+    youtube: "https://youtu.be/_cB_4QGrETQ?si=0oJVx6Y-MiuB5hZY",
+    title: "산촌",
+    label: "REHEARSAL",
+    featured: true
+  }
+  
+  {
+    youtube: "https://youtu.be/QTh3TUElaok?si=jT2Lm2TnDr6f-Wov",
+    title: "Non piu andrai",
+    label: "OPERA & ORATORIO",
+    featured: true
+  },
+  
+  {
+    youtube: "https://youtu.be/JGIp2jY-yFI?si=wXEhyjobnL7kOVV2",
+    title: "Virtue, Says Holy Writ",
+    label: "OPERA & ORATORIO",
+    featured: true
+  },
+
   {
     youtube: "https://youtu.be/Qpg52w_pcNs?si=oQkq-WvOrbGh3XBT",
     title: "Hai gia vinta la causa",
