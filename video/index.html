@@ -119,24 +119,49 @@
     // ------------------------------
     // Group by label (section blocks)
     // ------------------------------
-    function groupByLabel(videos){
-      const map = new Map();
-      videos.forEach(v => {
-        const key = v.label || "Video";
-        if(!map.has(key)) map.set(key, []);
-        map.get(key).push(v);
-      });
-      return Array.from(map.entries()).map(([label, list]) => ({ label, list }));
-    }
+    
+function groupByLabel(videos){
+  const map = new Map();
+
+  videos.forEach(v => {
+    const key = v.label || "Video";
+    if(!map.has(key)) map.set(key, []);
+    map.get(key).push(v);
+  });
+
+  return Array.from(map.entries())
+    .sort((a, b) => {
+      const ai = CATEGORY_ORDER.indexOf(a[0]);
+      const bi = CATEGORY_ORDER.indexOf(b[0]);
+      return (ai === -1 ? Infinity : ai) -
+             (bi === -1 ? Infinity : bi);
+    })
+    .map(([label, list]) => ({ label, list }));
+}
+
 
     // ------------------------------
     // Render
     // ------------------------------
     const VIDEOS = normalizeVideos(window.VIDEO_DB);
 
-    // filters = all labels + All
-    const labels = Array.from(new Set(VIDEOS.map(v => v.label)));
-    const filters = ["All", ...labels];
+    
+ // Fixed category order
+const CATEGORY_ORDER = [
+  "OPERA & ORATORIO",
+  "LIED & ART SONG",
+  "REHEARSAL"
+];
+
+const labels = Array.from(new Set(VIDEOS.map(v => v.label)))
+  .sort((a, b) => {
+    const ai = CATEGORY_ORDER.indexOf(a);
+    const bi = CATEGORY_ORDER.indexOf(b);
+    return (ai === -1 ? Infinity : ai) -
+           (bi === -1 ? Infinity : bi);
+  });
+
+const filters = ["All", ...labels];
 
     const $filters = document.getElementById("vFilters");
     const $sections = document.getElementById("vSections");
